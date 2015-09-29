@@ -78,9 +78,23 @@ namespace AttendanceAPP.DAL
             return count > 0;
         }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
         public List<string> GetAllAttendance(int myId)
         {
             string Query = @"select * from tbl_attendance where userId='"+myId+"'";
+=======
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+      
+
+        public List<string> GetAttendanceList(int id, string firstDate, string lastDate)
+        {
+            string Query = @"select * from tbl_attendance where userId='" + id + "' AND date>='"+firstDate+"' AND date<='"+lastDate+"' ";
+<<<<<<< HEAD
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
 
             SqlConnection connection = new SqlConnection(connectionStrings);
 
@@ -89,6 +103,8 @@ namespace AttendanceAPP.DAL
 
             SqlDataReader reader = command.ExecuteReader();
 
+<<<<<<< HEAD
+<<<<<<< HEAD
             List<string>myDateList=new List<string>();
             while (reader.Read())
             {
@@ -96,6 +112,17 @@ namespace AttendanceAPP.DAL
               
                 
 
+=======
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+            List<string> myDateList = new List<string>();
+            while (reader.Read())
+            {
+                string date = reader["date"].ToString();
+<<<<<<< HEAD
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
                 myDateList.Add(date);
             }
             reader.Close();
@@ -103,5 +130,62 @@ namespace AttendanceAPP.DAL
 
             return myDateList;
         }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+
+        public void SubmitAttendance(int i, string date)
+        {
+            string Query = @"insert into tbl_attendance(userId,date) values('" + i + "','" + date + "')";
+
+            SqlConnection connection = new SqlConnection(connectionStrings);
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        List<string>attendanceList=new List<string>(); 
+        public int GetCurrentId(int id, string date)
+        {
+            string Query = @"select * from tbl_attendance where userId='"+id+"' and date='"+date+"'";
+
+            SqlConnection connection = new SqlConnection(connectionStrings);
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+            int mydateId = 0;
+           
+
+            while (reader.Read())
+            {
+                mydateId=Int32.Parse(reader["Id"].ToString());
+          
+            }
+            reader.Close();
+            connection.Close();
+
+            return mydateId;
+        }
+
+        public void SubmitLogin(int id, DateTime time, string remark)
+        {
+            string Query = @"insert into tbl_login values('"+time.ToString()+"','"+remark+"','"+id+"')";
+
+            SqlConnection connection = new SqlConnection(connectionStrings);
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+<<<<<<< HEAD
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
+=======
+>>>>>>> a640082b294a1601a6267f275da3d884eee2ab5c
     }
 }
